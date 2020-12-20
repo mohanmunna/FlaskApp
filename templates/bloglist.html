@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blogs</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+<style type="text/css">
+  /*body { padding-top:30px; }*/
+.widget .panel-body { padding:0px; }
+.widget .list-group { margin-bottom: 0; }
+.widget .panel-title { display:inline }
+.widget .label-info { float: right; }
+.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+.widget .mic-info { color: #666666;font-size: 11px; }
+.widget .action { margin-top:5px; }
+.widget .comment-text { font-size: 12px; }
+.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+
+
+.menu
+{
+background-color: #00547E;
+/*border-bottom: 4px solid #04A3ED;*/
+width:100%;
+height: auto;
+padding: 10px 20px;
+position: fixed;
+margin: 0px;
+z-index: 1;
+opacity: 0.9;
+}
+
+.menu  .navbar-nav > .active > a
+{
+background-color : #04A3ED;
+color: white;
+font-weight: bold;
+}
+
+.menu  .navbar-nav >  li >  a
+{
+font-size: 13px;
+color: white;
+padding: 10px 35px;
+
+}
+.menu  .navbar-nav >  li >  a:hover
+{
+background-color: #04A3ED;
+}
+
+.navbar-header > a
+{
+font-family: 'Ubuntu Condensed', sans-serif;
+padding: 0px;
+margin: 0px;
+text-decoration: none;
+color: white;
+font-size: 25px;
+padding: 5px 30px;
+}
+.navbar-header > a:hover
+{
+text-decoration: none;
+color: #04A3ED;
+}
+
+
+
+
+/*body {
+    font-family: "Lato", sans-serif;padding:40px;
+}*/
+
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #00547E;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main, #main2, #main3{
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.footer {
+   left: 0;
+   bottom: 0;
+   /*width: 100%;*/
+   /*background-color: red;*/
+   color: white;
+   text-align: center;
+
+   background-color: #004365;
+    /* border-bottom: 4px solid #04A3ED; */
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    position: relative;
+    margin: 0px;
+    z-index: 1;
+    opacity: 0.9;
+}
+.media-object{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.updateBtn{
+          float: right;
+        background-color: #136107cf;
+        border: none;
+        color: white;
+        padding: 13px 35px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        /*box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);*/
+        border-radius: 5px 5px 5px 5px;
+        margin: 20px 0px 40px 5px;
+        transition: all 0.3s ease-in-out;
+  }
+</style>
+
+</head>
+<body ng-app="myApp" ng-controller="bloglistCtrl">
+
+  <div class="menu">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <span style="font-size:30px;cursor:pointer;color: #fbf3f3;" onclick="openNav()">☰</span>
+      <a href="#"></a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/newblog" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Post</a></li>
+        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{'{{username}}'}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  
+
+  <div class="container" >
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="/myaccount"><i class="fa fa-home" aria-hidden="true"> </i>&nbsp;&nbsp;My Account</a>
+        <a href="/blogs"><i class="fa fa-user" aria-hidden="true"> </i>&nbsp;&nbsp;Blogs</a>
+        <a href="/login"><i class="fa fa-sign-out" aria-hidden="true"> </i>&nbsp;&nbsp;Logout</a>
+    </div>
+
+    <div style="margin-top: 145px; text-align: center;" ng-show="noresult">
+        <h4>No Results</h4>
+      </div>
+    
+
+    <div ng-show="!noresult">
+  <div class="well" id="main" style="margin-top: 65px;" ng-repeat="blogs in blogsResult" >
+    <div class="media">
+        <a class="pull-left" href="#">
+          <img class="media-object" src="http://placekitten.com/150/150">
+        </a>
+
+        <div class="media-body">
+          <h4 class="media-heading">{{'{{blogs.title}}'}} 
+            <span style="float: right;" class="action" ng-show="isAdmin || userid==blogs.userid">
+                <button type="button" class="btn btn-primary btn-xs" title="Edit"  
+                ng-click="updateBlog(blogs)">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" title="Delete">
+                    <span class="glyphicon glyphicon-trash" ng-click="deleteBlog(blogs)"></span>
+                </button>
+            </span>
+          </h4>
+          <p class="text-right" ng-show="userid==blogs.userid">By <b>You</b></p>
+          <p class="text-right" ng-show="userid!=blogs.userid">By <b>{{'{{blogs.username}}'}}</b></p>
+          <p>{{'{{blogs.short_description}}'}}</p>
+          
+          <ul class="list-inline list-unstyled">
+            <li><span><i class="glyphicon glyphicon-calendar"></i> {{'{{blogs.updated_date}}'}} </span></li>
+                <li>|</li>
+                <span><i class="glyphicon glyphicon-comment"></i> {{'{{blogs.comments.length}}'}} comments</span>
+          </ul>
+
+          <button type="button" class="updateBtn" ng-click="detail(blogs)">Read more</button>
+
+
+
+       </div>
+
+       <div class="row">
+        <div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">Comments</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="comment in blogs.comments">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                  <div style="padding-top: 5px;padding-bottom: 17px;">{{'{{comment.msg}}'}}</div>
+
+                                    <div class="mic-info">
+                                        By: <span ng-show="userid==blogs.userid">You</span> 
+                                        <span ng-show="userid!=blogs.userid">{{'{{comment.cmntusername}}'}}</span> 
+                                        <span>{{'{{comment.cmntupdateddate}}'}}</span>
+                                    </div>
+                                </div>
+                                <div class="action" ng-show="!editComment && (isAdmin || userid==comment.cmntuserid)" >
+                                    <button type="button" class="btn btn-primary btn-xs" title="Edit"  
+                                    ng-click="editComment=!editComment">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Delete">
+                                        <span class="glyphicon glyphicon-trash" ng-click="deleteComment(comment)"></span>
+                                    </button>
+                                </div>
+                                <div ng-show="editComment" class="form-group" style="margin-right: 80px;">
+                                      <label class="control-label col-sm-12 headlabel">Add your comment</label>
+                                      <textarea class="form-control" ng-model="comment.msg" rows="3"></textarea>
+                                      
+                                      <input type="submit" name="submit" class="btn btn-info btn-md" value="Cancel" 
+                                      style="margin-top: 20px;margin-left: 20px;float: right;background-color: #1d1f1fc9;
+                                      border-color: #1d1f1fc9" ng-click="editComment=!editComment">
+
+                                      <input type="submit" name="submit" class="btn btn-info btn-md" value="Update" 
+                                      style="margin-top: 20px;margin-left: 20px;float: right;" ng-click="commentCRUD(comment, 'UPDATE')">
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="list-group-item" ng-show="!editComment">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                  <div style="padding-top: 5px;padding-bottom: 17px;">
+                                   
+                                    <div  class="form-group" style="margin-right: 80px;">
+                                        <label class="control-label col-sm-12 headlabel">Add your comment</label>
+                                        <textarea class="form-control" ng-model="$parent.customComment" rows="3"></textarea>
+                                    </div>
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" value="Comment" 
+                                    style="margin-right: 80px;float: right;" ng-click="commentCRUD(blogs, 'ADD')">
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+  
+
+</div>
+
+<div ng-show="!noresult">
+  <div class="footer" id="main2" >
+      <p>@copyright 2018 All Rights Reserved</p>
+    </div>
+</div>
+  <script src="static/controller/myApp.js"></script>
+  <script src="static/controller/bloglistCtrl.js"></script>  
+
+<script type="text/javascript">
+  
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("main2").style.marginLeft = "250px";
+    document.getElementById("main3").style.marginLeft = "250px";
+}
+
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    document.getElementById("main2").style.marginLeft = "0";
+    document.getElementById("main3").style.marginLeft = "0";
+
+}
+</script>
+
+</body>
+</html>

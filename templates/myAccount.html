@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+
+    <style type="text/css">
+    	.widget .panel-body { padding:0px; }
+		.widget .list-group { margin-bottom: 0; }
+		.widget .panel-title { display:inline }
+		.widget .label-info { float: right; }
+		.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+		.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+		.widget .mic-info { color: #666666;font-size: 11px; }
+		.widget .action { margin-top:5px; }
+		.widget .comment-text { font-size: 12px; }
+		.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+
+
+		.menu
+		{
+		background-color: #00547E;
+		/*border-bottom: 4px solid #04A3ED;*/
+		width:100%;
+		height: auto;
+		padding: 10px 20px;
+		position: fixed;
+		margin: 0px;
+		z-index: 1;
+		opacity: 0.9;
+		}
+
+		.menu  .navbar-nav > .active > a
+		{
+		background-color : #04A3ED;
+		color: white;
+		font-weight: bold;
+		}
+
+		.menu  .navbar-nav >  li >  a
+		{
+		font-size: 13px;
+		color: white;
+		padding: 10px 35px;
+
+		}
+		.menu  .navbar-nav >  li >  a:hover
+		{
+		background-color: #04A3ED;
+		}
+
+		.navbar-header > a
+		{
+		font-family: 'Ubuntu Condensed', sans-serif;
+		padding: 0px;
+		margin: 0px;
+		text-decoration: none;
+		color: white;
+		font-size: 25px;
+		padding: 5px 30px;
+		}
+		.navbar-header > a:hover
+		{
+		text-decoration: none;
+		color: #04A3ED;
+		}
+
+		.sidenav {
+		    height: 100%;
+		    width: 0;
+		    position: fixed;
+		    z-index: 1;
+		    top: 0;
+		    left: 0;
+		    background-color: #00547E;
+		    overflow-x: hidden;
+		    transition: 0.3s;
+		    padding-top: 60px;
+		}
+
+		.sidenav a {
+		    padding: 8px 8px 8px 32px;
+		    text-decoration: none;
+		    font-size: 25px;
+		    color: #fff;
+		    display: block;
+		    transition: 0.3s;
+		}
+
+		.sidenav a:hover {
+		    color: #f1f1f1;
+		}
+
+		.sidenav .closebtn {
+		    position: absolute;
+		    top: 0;
+		    right: 25px;
+		    font-size: 36px;
+		    margin-left: 50px;
+		}
+
+		#main, #main1,#main3  {
+		    transition: margin-left .5s;
+		    padding: 16px;
+		}
+
+
+		@media screen and (max-height: 450px) {
+		  .sidenav {padding-top: 15px;}
+		  .sidenav a {font-size: 18px;}
+		}
+
+
+		.footer {
+		   left: 0;
+		   bottom: 0;
+		   /*width: 100%;*/
+		   /*background-color: red;*/
+		   color: white;
+		   text-align: center;
+
+		   background-color: #004365;
+		    /* border-bottom: 4px solid #04A3ED; */
+		    width: 100%;
+		    height: auto;
+		    padding: 10px 20px;
+		    position: relative;
+		    margin: 0px;
+		    z-index: 1;
+		    opacity: 0.9;
+		}
+
+    	.headlabel{
+    		padding-left: 0px;
+    		text-align: center;
+    	}
+    	.updateBtn{
+	        float: left;
+		    background-color: #56baed;
+		    border: none;
+		    color: white;
+		    padding: 14px 46px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    /*box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);*/
+		    border-radius: 5px 5px 5px 5px;
+		    margin: 20px 33px 40px 5px;
+		    transition: all 0.3s ease-in-out;
+        }
+
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myAccountCtrl">
+
+	<div class="menu">
+	    <div class="container-fluid">
+	    <div class="navbar-header">
+	      <span style="font-size:30px;cursor:pointer;color: #fbf3f3;" onclick="openNav()">☰</span>
+	      <a href="#"></a>
+	    </div>
+	    <div>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="/newblog" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Post</a></li>
+    		<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> {{'{{username}}'}}</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="container">
+
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+			  <a href="/myaccount"><i class="fa fa-home" aria-hidden="true"> </i>&nbsp;&nbsp;My Account</a>
+			  <a href="/blogs"><i class="fa fa-user" aria-hidden="true"> </i>&nbsp;&nbsp;Blogs</a>
+			  <a href="/login"><i class="fa fa-sign-out" aria-hidden="true"> </i>&nbsp;&nbsp;Logout</a>
+		</div>
+		<div id="main" style="background-color: #67757a80">
+			<h2 style="margin-top: 96px;text-align: center;margin-bottom: 50px;">My Account</h2>
+			<div class="form-group" style="padding-bottom: 40px;">
+				<label class="control-label col-sm-6 headlabel">Name </label>
+				<label class="control-label col-sm-6 headlabel">{{'{{username}}'}} </label>
+			</div>
+
+			<div class="form-group" style="padding-bottom: 40px;">
+				<label class="control-label col-sm-6 headlabel">User Id </label>
+				<label class="control-label col-sm-6 headlabel">{{'{{userid}}'}} </label>
+			</div>
+
+			<div class="form-group" style="padding-bottom: 40px;">
+				<label class="control-label col-sm-6 headlabel">Type </label>
+				<label class="control-label col-sm-6 headlabel">{{'{{usertype}}'}} </label>
+			</div>
+
+			<div class="form-group" style="padding-bottom: 40px;">
+				<label class="control-label col-sm-6 headlabel">Api Key </label>
+				<label class="control-label col-sm-6 headlabel">{{'{{apikey}}'}} </label>
+			</div>
+		</div>	
+	</div>
+
+	<div class="footer" id="main1">
+		<p>@copyright 2018 All Rights Reserved</p>
+	</div>
+
+
+	<script src="static/controller/myApp.js"></script>
+  <script src="static/controller/myAccountCtrl.js"></script> 
+
+<script type="text/javascript">
+  
+	function openNav() {
+	    document.getElementById("mySidenav").style.width = "250px";
+	    document.getElementById("main").style.marginLeft = "250px";
+	    document.getElementById("main1").style.marginLeft = "250px";
+	}
+
+
+	function closeNav() {
+	    document.getElementById("mySidenav").style.width = "0";
+	    document.getElementById("main").style.marginLeft = "0";
+	    document.getElementById("main1").style.marginLeft = "0";
+	}
+</script>
+
+</body>
+</html>

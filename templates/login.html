@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		
+		body {
+		  margin: 0;
+		  padding: 0;
+		  background-color: #303334d9;
+		  height: 100vh;
+		  background-image: url("static/images/learnship.jpg");
+		}
+		#login .container #login-row #login-column #login-box {
+		  margin-top: 120px;
+		  max-width: 600px;
+		  height: 350px;
+		  border: 1px solid #9C9C9C;
+		  background-color: #EAEAEA;
+		}
+		#login .container #login-row #login-column #login-box #login-form {
+		  padding: 20px;
+		}
+		#login .container #login-row #login-column #login-box #login-form #register-link {
+		  margin-top: -85px;
+		}
+
+        .signupBtn{
+        float: right;
+        background-color: #56baed;
+        border: none;
+        color: white;
+        padding: 11px 62px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        border-radius: 5px 5px 5px 5px;
+        margin: 13px 62px 20px 19px;
+        transition: all 0.3s ease-in-out;
+        }
+
+	</style>
+</head>
+<body>
+
+<body ng-app="myApp" ng-controller="loginCtrl">
+    <div id="login">
+        <!-- <h3 class="text-center text-white pt-5">Login form</h3> -->
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-4">
+                </div>
+                <div id="login-column" class="col-md-4">
+                    <div id="login-box" class="col-md-12">
+                        <h3 class="text-center text-info">Login</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Username:</label><br>
+                            <input type="text" class="form-control"  ng-model="username"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            <input type="password" class="form-control" ng-model="password"/>
+                        </div>
+                        <label class="control-label col-sm-12" style="color: #e91e1efc;text-align: center;" ng-show="showError">{{'{{errorMsg}}'}}</label>
+                        <div class="col-sm-12">          
+                            <input type="button" class="signupBtn" ng-click="loginAccount()" value="Login">
+                        </div>
+
+                        <div id="register-link" class="text-right">
+                            <a href="signup" class="text-info">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="login-column" class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="static/bootstrap/ngstorage.min.js"></script> -->
+    <script src="static/controller/myApp.js"></script>
+    <script src="static/controller/loginCtrl.js"></script>
+
+</body>
+</html>
